@@ -11,11 +11,6 @@ requires = [
 import os.path
 import sys
 
-DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(DIR)
-os.chdir(DIR)
-
-import fastentrypoints  # Monkey-patches setuptools.
 from setuptools import find_packages, setup
 from setuptools.command.install import install
 
@@ -26,6 +21,9 @@ Since Hy transforms its Lisp code into Python abstract syntax tree (AST)
 objects, you have the whole beautiful world of Python at your fingertips,
 in Lisp form."""
 
+DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, DIR)
+os.chdir(DIR)
 
 class install(install):
     def run(self):
